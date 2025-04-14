@@ -30,6 +30,12 @@ export class CountryResolver {
     return country;
   }
 
+  @Query(() => [Country])
+  async getCountryByContinent(@Arg("continent") continent: string) {
+    const countries = await Country.findBy({ continent });
+    return countries;
+  }
+
   @Mutation(() => Country)
   async createCountry(
     @Arg("data") { code, name, flag, continent }: CountryInput
